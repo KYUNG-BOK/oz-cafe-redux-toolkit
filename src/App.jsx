@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import './App.scss'
-import data from './assets/data'
 import Header from './components/Header'
 import Menu from './components/Menu'
 import { Route, Routes } from 'react-router-dom'
 import Cart from './components/Cart'
 
 function App() {
-  const [ menu, setMenu ] = useState(data.menu)
-  const [ cart, setCart ] = useState([])
+  const menu = useSelector(state => state.menu)
+  const cart = useSelector(state => state.cart)
+
   console.log(cart)
 
   return (
@@ -16,8 +16,9 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path='/' element={<Menu menu={menu} cart={cart} setCart={setCart} />}/>
-          <Route path='/cart' element={<Cart menu={menu} cart={cart} setCart={setCart} />}/>
+          {/* 이제 props로 상태 전달 안 함 */}
+          <Route path='/' element={<Menu />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </main>
     </div>
